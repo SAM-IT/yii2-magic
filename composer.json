@@ -1,0 +1,15 @@
+{
+    "name": "sam-it/yii2-magic",
+    "description": "Improvements to Yii request handling.",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sam Mousa",
+            "email": "sam@mousa.nl"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "2.0.x-dev"
+    }
+}
