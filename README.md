@@ -1,2 +1,10 @@
 # yii2-magic
-Repository that contains several improvements to Yii2.
+Improvements for Yii2 that make it more "magic".
+
+# ActionInjectionTrait
+Use this trait in your controller to get dependency injection in controller actions.
+````
+use \SamIT\Yii2\Traits\ActionInjectionTrait;
+````
+
+Currently this depends in on an unstable version of Yii, but when 2.0.7 is released there will be a tagged release of this library pointing to it.
