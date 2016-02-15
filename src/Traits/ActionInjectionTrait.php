@@ -4,6 +4,7 @@ namespace SamIT\Yii2\Traits;
 
 use yii\base\InlineAction;
 use yii\base\InvalidConfigException;
+use yii\web\BadRequestHttpException;
 
 /**
  * Trait that implements dependency injection for controller actions.
