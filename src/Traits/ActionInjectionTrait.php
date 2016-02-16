@@ -13,16 +13,12 @@ use yii\web\BadRequestHttpException;
 trait ActionInjectionTrait
 {
     /**
-     * @var array the parameters bound to the current action.
-     */
-    public $actionParams;
-
-    /**
      * @see https://github.com/yiisoft/yii2/issues/9476
      * @inheritdoc
      */
     public function bindActionParams($action, $params)
     {
+
         if ($action instanceof InlineAction) {
             $callable = [$this, $action->actionMethod];
         } else {
@@ -39,7 +35,11 @@ trait ActionInjectionTrait
         foreach ((new \ReflectionMethod($callable[0], $callable[1]))->getParameters() as $i => $param) {
             $actionParams[$param->getName()] = $args[$i];
         }
-        $this->actionParams = $actionParams;
+
+        if (property_exists($this, 'actionParams')) {
+            $this->actionParams = $actionParams;
+        }
+        
         return $args;
     }
 }
