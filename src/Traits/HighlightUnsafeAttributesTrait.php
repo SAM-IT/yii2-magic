@@ -36,7 +36,7 @@ trait HighlightUnsafeAttributesTrait
             }
 
             $this->getView()->registerCss(<<<CSS
-.unsafe {
+.unsafe:not(.unsafe-ok) {
     border: 3px solid red;
 }
 CSS
