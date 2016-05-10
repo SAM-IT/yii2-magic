@@ -12,5 +12,3 @@ Use this trait in your form to highlight unsafe attributes.
 ````
 use \SamIT\Yii2\Traits\HighlightUnsafeAttributesTrait;
 ````
-
-Currently this depends in on an unstable version of Yii, but when 2.0.7 is released there will be a tagged release of this library pointing to it.
