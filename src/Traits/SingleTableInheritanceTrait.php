@@ -58,7 +58,7 @@ trait SingleTableInheritanceTrait
         return $cache[$type];
     }
 
-    final protected static function getInheritanceColumn()
+    final public static function getInheritanceColumn()
     {
         static $cache;
         if(!isset($cache)) {
@@ -96,6 +96,6 @@ trait SingleTableInheritanceTrait
 
     protected static function findSingleTableInheritance()
     {
-        return new SingleTableInheritanceQuery(static::class, [self::getInheritanceColumn() => self::getTypeFromClass(static::class)]);
+        return new SingleTableInheritanceQuery(static::class, ['type' => self::getTypeFromClass(static::class)]);
     }
 }

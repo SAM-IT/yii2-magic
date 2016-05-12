@@ -8,8 +8,10 @@ trait SingleTableInheritanceQueryTrait
 
     public function prepare($builder)
     {
+        $modelClass = $this->modelClass;
+        $column = $modelClass::getInheritanceColumn();
         if ($this->type !== null) {
-            $this->andFilterWhere(['type' => $this->type]);
+            $this->andFilterWhere([$column => $this->type]);
         }
         return parent::prepare($builder);
     }
