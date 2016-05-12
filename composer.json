@@ -7,6 +7,10 @@
         {
             "name": "Sam Mousa",
             "email": "sam@mousa.nl"
+        },
+        {
+            "name": "Joey Claessen",
+            "email": "joey_claessen@hotmail.com"
         }
     ],
     "require": {
