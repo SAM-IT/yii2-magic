@@ -94,8 +94,8 @@ trait SingleTableInheritanceTrait
         return self::findSingleTableInheritance();
     }
 
-    protected static function findSingleTableInheritance()
+    protected static function findSingleTableInheritance($queryClass = SingleTableInheritanceQuery::class)
     {
-        return new SingleTableInheritanceQuery(static::class, ['type' => self::getTypeFromClass(static::class)]);
+        return new $queryClass(static::class, ['type' => self::getTypeFromClass(static::class)]);
     }
 }
