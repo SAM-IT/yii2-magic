@@ -40,7 +40,7 @@ class BatchInserter
 
     private $rowCache = [];
 
-    protected $ignoreDuplicates;
+    protected $strategy;
 
     /**
      * Inserter that will always commit immediately after its parent.
@@ -66,13 +66,13 @@ class BatchInserter
         int $batchSize = null,
         bool $sort = false,
         \Closure $logCallback = null,
-        bool $ignoreDuplicates = false,
+        string $strategy = 'INSERT',
         self $child = null
     )
     {
         $this->table = $table;
 
-        $this->ignoreDuplicates = $ignoreDuplicates;
+        $this->strategy = $strategy;
 
         $this->sort = $sort;
 
@@ -114,9 +114,7 @@ class BatchInserter
         if (!empty($this->rowCache)) {
             $this->log("Sending " . count($this->rowCache) . " records to database({$this->table})\n");
             $command = $this->db->createCommand()->batchInsert($this->table, $this->columns, $this->rowCache);
-            if ($this->ignoreDuplicates) {
-                $command->sql = strtr($command->sql, ['INSERT' => 'INSERT IGNORE']);
-            }
+            $command->sql = strtr($command->sql, ['INSERT' => $this->strategy]);
             $this->rowCache = [];
             $this->log("Insert result: " . $command->execute());
         }
