@@ -49,6 +49,11 @@ class BatchInserter
     protected $childInserter;
 
     /**
+     * @var Connection
+     */
+    protected $db;
+
+    /**
      * BatchInserter constructor.
      * @param string $table The name of the table
      * @param array $columns The column names
@@ -86,6 +91,8 @@ class BatchInserter
         $this->logCallback = $logCallback ?? function($text) { echo $text; };
 
         $this->childInserter = $child;
+
+        $this->db = $db;
     }
 
     /**
