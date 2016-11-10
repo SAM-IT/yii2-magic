@@ -123,7 +123,7 @@ class BatchInserter
             $command = $this->db->createCommand()->batchInsert($this->table, $this->columns, $this->rowCache);
             $command->sql = strtr($command->sql, ['INSERT' => $this->strategy]);
             $this->rowCache = [];
-            $this->log("Insert result: " . $command->execute());
+            $this->log("Insert result: " . $command->execute() . "\n");
         }
 
         if (isset($this->childInserter)) {
