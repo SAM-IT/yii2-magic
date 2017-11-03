@@ -43,10 +43,10 @@ trait ActionInjectionTrait
         // Dont put injected  params in requestedParams, this breaks the debugger.
         foreach($actionParams as $key => $value) {
             if (is_object($value)) {
-                if (\Yii::$app->has($key, true)
-                    && $value === \Yii::$app->get($key)
+                if ($this->module->has($key, true)
+                    && $value === $this->module->get($key)
                 ) {
-                    $value = "Application component: $key";
+                    $value = "Component: $key";
                 } else {
                     $value = "DI: " .get_class($value);
                 }
