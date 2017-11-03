@@ -1,3 +1,10 @@
+[![Latest Stable Version](https://poser.pugx.org/sam-it/yii2-magic/v/stable)](https://packagist.org/packages/sam-it/yii2-magic)
+[![Total Downloads](https://poser.pugx.org/sam-it/yii2-magic/downloads)](https://packagist.org/packages/sam-it/yii2-magic)
+[![Latest Unstable Version](https://poser.pugx.org/sam-it/yii2-magic/v/unstable)](https://packagist.org/packages/sam-it/yii2-magic)
+[![License](https://poser.pugx.org/sam-it/yii2-magic/license)](https://packagist.org/packages/sam-it/yii2-magic)
+[![Monthly Downloads](https://poser.pugx.org/sam-it/yii2-magic/d/monthly)](https://packagist.org/packages/sam-it/yii2-magic)
+[![Daily Downloads](https://poser.pugx.org/sam-it/yii2-magic/d/daily)](https://packagist.org/packages/sam-it/yii2-magic)
+
 # yii2-magic
 Improvements for Yii2 that make it more "magic".
 
