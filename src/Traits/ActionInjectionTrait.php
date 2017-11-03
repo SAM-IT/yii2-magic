@@ -27,7 +27,7 @@ trait ActionInjectionTrait
 
         $actionParams = [];
         try {
-            $args = \Yii::$container->resolveCallableDependencies($callable, $params);
+            $args = \Yii::$container->resolveCallableDependencies($callable, $params, $this->module);
         } catch (InvalidConfigException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
