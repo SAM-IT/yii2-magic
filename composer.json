@@ -1,6 +1,6 @@
 {
     "name": "sam-it/yii2-magic",
-    "description": "Improvements to Yii request handling.",
+    "description": "Improvements to Yii2 framework.",
     "type": "yii2-extension",
     "license": "MIT",
     "authors": [
@@ -20,5 +20,12 @@
         "psr-4": {
             "SamIT\\Yii2\\" : "src/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+
 }
