@@ -87,9 +87,7 @@ class UrlSigner extends Component
         }
         $hmac = $params[$this->hmacParam];
         $signedParams = [];
-        if ($this->allowAdditions
-            && !empty($params[$this->paramsParam])
-        ) {
+        if (!empty($params[$this->paramsParam])) {
             $signedParams[$this->paramsParam] = $params[$this->paramsParam];
             foreach(explode(',', base64_decode($params[$this->paramsParam])) as $signedParam) {
                 $signedParams[$signedParam] = $params[$signedParam] ?? null;
