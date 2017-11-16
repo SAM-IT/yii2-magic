@@ -82,6 +82,9 @@ class UrlSigner extends Component
      */
     public function verifyHMAC(array $params):bool
     {
+        if (!isset($params[$this->hmacParam])) {
+           return false;
+        }
         $hmac = $params[$this->hmacParam];
         $signedParams = [];
         if ($this->allowAdditions
