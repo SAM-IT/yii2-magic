@@ -49,9 +49,6 @@ class UrlSigner extends Component
         }
 
         ksort($params);
-        codecept_debug($params);
-        codecept_debug($route);
-
         return substr(hash_hmac('sha256', trim($route, '/') . '|' .  implode('#', $params), $this->secret->getValue()), 1, 16);
     }
 
@@ -68,8 +65,15 @@ class UrlSigner extends Component
         if (isset($queryParams[$this->hmacParam])) {
             throw new \Exception("HMAC param is already present");
         }
+
         $params = array_keys($queryParams);
         $route = $queryParams[0];
+
+        if (strncmp($route, '/', 1) !== 0) {
+            throw new \Exception("Route must be absolute (start with /)");
+        }
+
+
         if ($params[0] == '0') {
             unset($params[0]);
         }
