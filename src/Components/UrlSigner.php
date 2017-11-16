@@ -32,7 +32,7 @@ class UrlSigner extends Component
             throw new \Exception("Secret must be set and an instance of SamIT\\Yii2\\Secret");
         }
 
-        $this->secret->lock(2);
+        $this->secret->lock(1);
     }
 
 
@@ -42,14 +42,17 @@ class UrlSigner extends Component
      * @return string The HMAC
      * @throws \Exception
      */
-    public function calculateHMAC(array $params): string
+    public function calculateHMAC(array $params, string $route): string
     {
         if (isset($params[0])) {
             unset($params[0]);
         }
 
         ksort($params);
-        return substr(hash_hmac('sha256', implode('#', $params), $this->secret->getValue()), 1, 16);
+        codecept_debug($params);
+        codecept_debug($route);
+
+        return substr(hash_hmac('sha256', trim($route, '/') . '|' .  implode('#', $params), $this->secret->getValue()), 1, 16);
     }
 
     /**
@@ -62,7 +65,11 @@ class UrlSigner extends Component
      */
     public function signParams(array &$queryParams, $allowAddition = true): void
     {
+        if (isset($queryParams[$this->hmacParam])) {
+            throw new \Exception("HMAC param is already present");
+        }
         $params = array_keys($queryParams);
+        $route = $queryParams[0];
         if ($params[0] == '0') {
             unset($params[0]);
         }
@@ -71,7 +78,7 @@ class UrlSigner extends Component
             $queryParams[$this->paramsParam] = strtr(StringHelper::base64UrlEncode(implode(',', $params)), ['=' => '']);
         }
 
-        $queryParams[$this->hmacParam] = $this->calculateHMAC($queryParams);
+        $queryParams[$this->hmacParam] = $this->calculateHMAC($queryParams, $route);
         array_unshift($params, implode(',', array_keys($params)));
     }
 
@@ -80,7 +87,7 @@ class UrlSigner extends Component
      * @return bool
      * @throws \Exception
      */
-    public function verifyHMAC(array $params):bool
+    public function verifyHMAC(array $params, string $route):bool
     {
         if (!isset($params[$this->hmacParam])) {
            return false;
@@ -96,8 +103,7 @@ class UrlSigner extends Component
             $signedParams = $params;
             unset($signedParams[$this->hmacParam]);
         }
-
-        $calculated = $this->calculateHMAC($signedParams);
+        $calculated = $this->calculateHMAC($signedParams, $route);
         return hash_equals($calculated, $hmac);
     }
 }

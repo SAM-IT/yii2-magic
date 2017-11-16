@@ -30,7 +30,7 @@ class HmacFilter extends ActionFilter
     {
         /** @var Request $request */
         $request = $action->controller->module->get('request');
-        if (!$this->signer->verifyHMAC($request->queryParams)) {
+        if (!$this->signer->verifyHMAC($request->queryParams, $action->controller->route)) {
             throw new ForbiddenHttpException("No or invalid HMAC");
         }
     }
